@@ -3,7 +3,7 @@ import { Link,  } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { toast } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-// import { Helmet } from "react-helmet-async";
+
 
 
 const Register = () => {
@@ -14,9 +14,7 @@ const Register = () => {
 
 	const {createUser,  updateUserProfile }=useContext(AuthContext);
 
-	// const location = useLocation();
-	// // const navigate = useNavigate(); 
-	// console.log('location in the login page', location);
+	
     const handleRegister = e => {
 		e.preventDefault();
 		console.log(e.currentTarget);
@@ -68,16 +66,14 @@ const Register = () => {
 				setRegisterError(error.message)
 			}
 			)
-			// navigate(location?.state? location.state: '/');
+			
 		
     }
     return (
         <div className="justify-center place-items-center lg:ml-[450px] md:ml-[200px] m-5  mb-12">
-            {/* <Helmet>
-            <title> Your Dream Home | Register </title>
-           </Helmet> */}
-			<div className="w-full max-w-md p-8 space-y-3 rounded-xl border-2 mt-12  bg-pink-200 ">
-	<h1 className="text-2xl font-bold text-center ">Please, register </h1>
+           
+			<div className="w-full max-w-md p-8 space-y-3 rounded-xl border-2 mt-12 bg-green-300 ">
+	<h1 className="text-2xl font-bold text-center ">Register, please </h1>
 	<form onSubmit={handleRegister} noValidate="" action="" className="space-y-4">
 		<div className="space-y-1 text-sm">
 			<label htmlFor="username" className="block font-bold">Your full name</label>
@@ -117,7 +113,7 @@ const Register = () => {
 				<a rel="noopener noreferrer" href="#">Forgot Password?</a>
 			</div>
 		</div>
-		<button className="block w-full p-3 text-center rounded-sm text-gray-900 bg-red-400 font-bold"> Register </button>
+		<button className="block w-full p-3 text-center rounded-sm text-gray-900 bg-green-600 font-bold"> Register </button>
 	</form>
 	{
 		registerError && <p className="text-red-700">

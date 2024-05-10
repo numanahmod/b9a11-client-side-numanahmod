@@ -94,13 +94,13 @@ const LogIn = () => {
             <title> Your Dream Home |Login </title>
            </Helmet> */}
             <div className="justify-center place-items-center lg:ml-[450px] md:ml-[200px] m-5 mb-12">
-            <div className="w-full max-w-md p-8 space-y-3 rounded-xl border-2 mt-12 bg-pink-200 ">
+            <div className="w-full max-w-md p-8 space-y-3 rounded-xl border-2 mt-12 bg-green-300">
                
             
 			<h2 className="mb-3 text-3xl font-semibold text-center">Login to your account</h2>
 	
 	<div className="my-6 space-y-4">
-		<button onClick={handleGoogleLogin} aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-600 focus:dark:ring-violet-600 bg-purple-300">
+		<button onClick={handleGoogleLogin} aria-label="Login with Google" type="button" className="flex items-center justify-center w-full h-12 p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-600 focus:dark:ring-violet-600 bg-purple-300">
 			<img className="w-6 h-6" src={google} alt="" />
 			<p>Login with Google</p>
 		</button>
@@ -132,7 +132,7 @@ const LogIn = () => {
 				<a rel="noopener noreferrer" href="#">Forgot Password?</a>
 			</div>
 		</div>
-		<button className="block w-full p-3 text-center rounded-sm text-gray-900  bg-red-400 font-bold">Login</button>
+		<button className="block w-full p-3 text-center rounded-sm text-gray-900  bg-green-600 font-bold">Login</button>
 	</form>
     
     
