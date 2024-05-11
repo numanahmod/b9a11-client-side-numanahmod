@@ -26,7 +26,15 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 import { Fade } from 'react-awesome-reveal';
 
+import TabCategory from '../Components/TabCategory';
+import { useLoaderData } from 'react-router-dom';
+
 const Home = () => {
+
+
+  const jobs = useLoaderData();
+
+  console.log(jobs);
 
 
 
@@ -114,29 +122,13 @@ const Home = () => {
 
            
 
+            <div>
             <h1 className='text-center text-3xl font-bold mb-8 animate__animated animate__swing'> Job by category  </h1>
-            <p></p>
-            {/* <div className='lg:flex lg:grid-cols-3 md:flex md:grid-cols-3 justify-center text-center items-center'>
-              <div className=' border-2 w-80 h-60 bg-slate-200 m-6 p-3 shadow-2xl hover:bg-slate-100'>
-              <LuPlane className=' text-5xl ml-28 mt-12 mb-5 text-green-600' />
-                  <h1 className='font-bold text-xl'>500+ Destinations</h1>
-                  <p> We provide transport services  </p>
+            <p className='text-center'>Find out your desire work from here. Click your job category tab to get your job</p>
+              <TabCategory jobs= {jobs}/> 
 
-              </div>
-              <div className=' border-2 w-80 h-60 bg-slate-200 m-6 p-3 shadow-2xl hover:bg-slate-100'>
-              <GiPriceTag className=' text-5xl ml-28 mt-12 mb-5 text-green-600' />
-                  <h1 className='font-bold text-xl'>Best Price Guarantee</h1>
-                  <p>You will get here a reasonable price </p>
-
-              </div>
-              <div className=' border-2 w-80 h-60 bg-slate-200 m-6 p-3 shadow-2xl hover:bg-slate-100'>
-              <MdOutlineContactSupport className=' text-5xl ml-28 mt-12 mb-5 text-green-600' />
-                  <h1 className='font-bold text-xl'>Top Notch Support</h1>
-                  <p> You will feel a enjoyable trip  </p>
-
-              </div>
-              
-            </div> */}
+            </div>
+            
 
 
                 {/* Extra section 1 */}
@@ -177,13 +169,15 @@ const Home = () => {
     </div>
              </section>
 
+             
+
              {/* Extra section 2  */}
 
              <section className="bg-white dark:bg-gray-900">
     <div className="max-w-6xl px-6 py-10 mx-auto">
-        <p className="text-xl font-medium text-blue-500 ">Testimonials</p>
+        <p className="text-xl font-medium text-blue-500 text-center">Testimonials</p>
 
-        <h1 className="mt-2 text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white">
+        <h1 className="mt-2 text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white text-center">
             What our clients saying
         </h1>
 

@@ -20,6 +20,9 @@ import NotFoundPage from './Pages/NotFoundPage';
 
 import Contact from './Pages/Contact';
 import LogIn from './Pages/LogIn';
+import Blogs from './Pages/Blogs';
+import AllJobs from './Pages/AllJobs';
+import ViewDetails from './Pages/ViewDetails';
 
 
 
@@ -35,6 +38,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home/>,
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/postedJobs`)
        
       },
       
@@ -54,7 +58,20 @@ const router = createBrowserRouter([
         path:"/contact",
         element: <PrivateRoute><Contact></Contact></PrivateRoute>, 
       },
-      
+      {
+        path: '/blogs',
+        element: <Blogs></Blogs>
+      },
+      {
+        path: '/allJobs',
+        element: <AllJobs></AllJobs>,
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/postedJobs`)
+      },
+      {
+        path:"/job/:id",
+        element: <PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>, 
+        loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/job/${params.id}`)
+      },
       
       
      
