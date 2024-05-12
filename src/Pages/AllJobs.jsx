@@ -13,9 +13,9 @@ const AllJobs = () => {
       <tr>
  
         <th>Title </th> 
-        <th className="pl-64">Posting date</th> 
+        <th className="pl-52">Posting date</th> 
         <th className="pr-32">Deadline </th> 
-        <th className="pr-44">Salary</th> 
+        <th className="pr-64">Salary</th> 
         
       </tr>
     </thead> 

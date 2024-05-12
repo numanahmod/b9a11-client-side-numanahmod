@@ -10,7 +10,7 @@ const JobCard = ({job}) => {
 
     const {job_type, job_title,
         posted_by, job_posting_date, application_deadline, 
-        salary_range, job_applicants, _id
+        min_price, max_price, job_applicants, _id
                
     } = job;
 
@@ -33,8 +33,8 @@ const JobCard = ({job}) => {
 
           <span className='text-xs font-light text-gray-800 '>
             
-            <p>Posting Date: <span className="text-lime-600 ">{job_posting_date}</span></p>
-            <p>Deadline: <span className="text-red-400">{application_deadline}</span></p>
+            <p>Posting Date: <span className="text-lime-600 ">{new Date(job_posting_date).toLocaleDateString()}</span></p>
+            <p>Deadline: <span className="text-red-400">{new Date(application_deadline).toLocaleDateString()}</span></p>
           </span>
         </div>
   
@@ -48,7 +48,7 @@ const JobCard = ({job}) => {
             <span className=" text-xl font-bold"> {posted_by}</span>
           </p>
           <p className='mt-2 text-sm font-bold text-gray-600 '>
-            Range: {salary_range}
+            Salary : Minimum:{min_price}$ - Maximum:{max_price}$
           </p>
           <div className='flex items-center justify-between'>
 

@@ -1,11 +1,50 @@
+import { useContext, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
+import axios from "axios";
+import { toast } from "react-toastify";
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 
 const ViewDetails = () => {
         const job = useLoaderData();
+        const [applyDate, setApplyDate] = useState(new Date())
         const {job_type, job_title,
             posted_by,  
-            salary_range, job_applicants, description, image_url } = job;
+            min_price, max_price, job_applicants, description, image_url, _id, buyer_email, 
+            application_deadline
+             } = job;
+
+            const {user } = useContext(AuthContext);
+
+
+    const handleSubmit = async e =>{
+        e.preventDefault();
+
+        if(user?.email === buyer_email) return toast.error('You can not apply')
+        if(application_deadline === applyDated) return toast.error('Date is over')
+        const form = e.target;
+        const jobId = _id
+        const Deadline = application_deadline;
+
+        const applyDated = applyDate;
+        
+        const email = user?.email;
+        const username = user?.displayName
+        const status = 'pending';
+        const  resume = form.resumeLink.value;
+        const applyForm = {jobId, email, status, username,resume, Deadline, applyDated }
+        console.table(applyForm);
+
+        try {
+          const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/appliedJobs`, applyForm)
+          console.log(data);
+          toast.success('You have successfully applied')
+        } catch (err) {
+          console.log(err);
+        }
+    }
 
     return (
         <header className="bg-white dark:bg-gray-900">
@@ -29,7 +68,7 @@ const ViewDetails = () => {
             <span className=" text-xl font-bold"> {posted_by}</span>
           </p>
           <p className='mt-2 text-sm font-bold text-gray-600 '>
-            Range: {salary_range}
+          Salary : Minimum:{min_price}$ - Maximum:{max_price}$
           </p>
           <div className='flex items-center justify-between'>
 
@@ -45,7 +84,47 @@ const ViewDetails = () => {
 
                 
                 <div className="mt-6">
-                   <Link to={`/apply`} className="px-6 py-2.5 mt-6 text-sm font-medium leading-5 text-center text-white capitalize bg-blue-600 rounded-lg hover:bg-blue-500 lg:mx-0 lg:w-auto focus:outline-none"> Apply </Link>
+                   <Link onClick={()=>document.getElementById('my_modal_5').showModal()} className="px-6 py-2.5 mt-6 text-sm font-medium leading-5 text-center text-white capitalize bg-blue-600 rounded-lg hover:bg-blue-500 lg:mx-0 lg:w-auto focus:outline-none"> Apply </Link>
+                   <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+  <div className="modal-box">
+    <form onSubmit={handleSubmit}> 
+       <div className="grid gap-2">
+       <label htmlFor="">User name </label>
+        <input type="text" name="username" id="" 
+        className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-900 text-gray-100 focus:border-violet-400" disabled defaultValue={user?.displayName} />
+       </div>
+       <div className="grid gap-2">
+       <label htmlFor="">User Email </label>
+        <input type="email" name="email" id="" 
+        className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-900 text-gray-100 focus:border-violet-400" disabled defaultValue={user?.email} />
+       </div>
+       <div className="grid gap-2">
+       <label htmlFor=""> Resume Link  </label>
+        <input type="text" name="resumeLink" id="" placeholder="Your resume link" 
+        className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-900 text-gray-100 focus:border-violet-400" required />
+       </div>
+       <div className='flex flex-col gap-2 '>
+              <label className='text-gray-700'>Deadline</label>
+
+              {/* Date Picker Input Field */}
+              <DatePicker
+                className='border p-2 rounded-md'
+                selected={applyDate}
+                onChange={date => setApplyDate(date)}
+              />
+            </div>
+
+       
+       <div className="modal-action">
+      <button onSubmit={handleSubmit} method="dialog">
+        {/* if there is a button in div, it will close the modal */}
+        <input type="submit" value="submit" className="btn bg-orange-500"/>
+      </button>
+    </div>
+    </form>
+    
+  </div>
+</dialog>
                 </div>
             </div>
         </div>
