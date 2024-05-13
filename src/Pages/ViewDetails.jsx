@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import Swal from "sweetalert2";
 
 
 const ViewDetails = () => {
@@ -13,7 +14,7 @@ const ViewDetails = () => {
         const {job_type, job_title,
             posted_by,  
             min_price, max_price, job_applicants, description, image_url, _id, buyer_email, 
-            application_deadline
+            job_posting_date, application_deadline,
              } = job;
 
             const {user } = useContext(AuthContext);
@@ -23,10 +24,10 @@ const ViewDetails = () => {
         e.preventDefault();
 
         if(user?.email === buyer_email) return toast.error('You can not apply')
-        if(application_deadline === applyDated) return toast.error('Date is over')
+        // if(application_deadline === applyDated) return toast.error('Date is over')
         const form = e.target;
         const jobId = _id
-        const Deadline = application_deadline;
+        // const Deadline = application_deadline;
 
         const applyDated = applyDate;
         
@@ -34,15 +35,25 @@ const ViewDetails = () => {
         const username = user?.displayName
         const status = 'pending';
         const  resume = form.resumeLink.value;
-        const applyForm = {jobId, email, status, username,resume, Deadline, applyDated }
+        const applyForm = {jobId, email, status, username,resume, applyDated }
         console.table(applyForm);
 
         try {
           const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/appliedJobs`, applyForm)
           console.log(data);
-          toast.success('You have successfully applied')
+          if (data.insertedId) {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Job data added successfully',
+                icon: 'success',
+                confirmButtonText: 'Cool'
+              })
+              
+            
+        }
         } catch (err) {
           console.log(err);
+          toast.error('There is', err.massage)
         }
     }
 

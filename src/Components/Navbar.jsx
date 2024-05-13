@@ -39,7 +39,7 @@ const Navbar = () => {
         <NavLink to='/addJob'className={({isActive})=> isActive? 'btn  font-bold btn2':'font-bold btn'}> Add A Job   </NavLink>}
 
         {user && 
-         <NavLink to='/myJobs'className={({isActive})=> isActive? 'btn  font-bold btn2':'font-bold btn'}> My Jobs   </NavLink>}
+         <NavLink to='/myAddedJobs'className={({isActive})=> isActive? 'btn  font-bold btn2':'font-bold btn'}> My Jobs   </NavLink>}
 
        {
         <NavLink to='/blogs' className={({isActive})=> isActive? 'btn font-bold btn2':'font-bold btn'}>  Blogs </NavLink>
