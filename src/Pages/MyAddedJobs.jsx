@@ -3,10 +3,12 @@ import { AuthContext } from '../providers/AuthProvider'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import toast from 'react-hot-toast'
+import Swal from 'sweetalert2'
 
 const MyAddedJobs = () => {
   const { user } = useContext(AuthContext)
   const [jobs, setJobs] = useState([])
+  const [control, setControl] = useState(false);
 
   useEffect(() => {
     getData()
@@ -21,21 +23,39 @@ const MyAddedJobs = () => {
   }
   
 
-  const handleDelete = async id => {
-    try {
-      const { data } = await axios.delete(
-        `${import.meta.env.VITE_API_URL}/job/${id}`
-      )
-      console.log(data)
-      toast.success('Delete Successful')
+  const handleDeleteAJob = async id => {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`${import.meta.env.VITE_API_URL}/deleteAJob/${id}`, {
+                method: 'DELETE'
+            })
+            .then((res) => res.json())
+            .then(data =>{
+               if (data.deletedCount > 0) {
+                setControl(!control)
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                  });
+                
+               }
+               getData()
+            })
+         
+        }
+      });
 
-      //refresh ui
-      getData()
-    } catch (err) {
-      console.log(err.message)
-      toast.error(err.message)
-    }
-  }
+   
+}
   return (
     <section className='container px-4 mx-auto pt-12'>
       <div className='flex items-center gap-x-3'>
@@ -140,7 +160,7 @@ const MyAddedJobs = () => {
                       <td className='px-4 py-4 text-sm whitespace-nowrap'>
                         <div className='flex items-center gap-x-6'>
                           <button
-                            onClick={() => handleDelete(job._id)}
+                            onClick={() => handleDeleteAJob(job._id)}
                             className='text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none'
                           >
                             <svg
