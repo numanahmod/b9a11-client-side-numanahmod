@@ -55,6 +55,7 @@ const ViewDetails = () => {
           console.log(err);
           toast.error('There is', err.massage)
         }
+        document.getElementById('my_modal_5').close()
     }
 
     return (
@@ -99,6 +100,7 @@ const ViewDetails = () => {
                    <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
   <div className="modal-box">
     <form onSubmit={handleSubmit}> 
+    <p className="text-center text-2xl font-bold">Apply Form </p>
        <div className="grid gap-2">
        <label htmlFor="">User name </label>
         <input type="text" name="username" id="" 
@@ -127,7 +129,7 @@ const ViewDetails = () => {
 
        
        <div className="modal-action">
-      <button onSubmit={handleSubmit} method="dialog">
+      <button   method="dialog">
         {/* if there is a button in div, it will close the modal */}
         <input type="submit" value="submit" className="btn bg-orange-500"/>
       </button>

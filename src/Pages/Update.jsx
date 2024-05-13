@@ -1,81 +1,92 @@
 import { useContext, useState } from 'react'
 import DatePicker from 'react-datepicker'
+
 import 'react-datepicker/dist/react-datepicker.css'
-import { AuthContext } from '../providers/AuthProvider'
-
-
 import axios from 'axios'
+import { useLoaderData, } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import { AuthContext } from '../providers/AuthProvider'
 import Swal from 'sweetalert2'
 
-const AddAJob = () => {
-  const { user } = useContext(AuthContext)
-  
 
-  const [startDate, setStartDate] = useState(new Date())
-  const [postingDate, setPostingDate] = useState(new Date())
-  let job_applicants_number = 0;
-  const handleAddJob = async e => {
+const Update = () => {
+
+ 
+     const job = useLoaderData()
+  const {
+             _id,
+             image_url,
+              job_title,
+              application_deadline,
+              job_posting_date,
+              job_type,
+              posted_by,
+              min_price,
+              max_price,
+              description,
+              buyer_email,
+              job_applicants
+  } = job || {}
+  const { user } = useContext(AuthContext)
+  const [startDate, setStartDate] = useState(new Date(application_deadline) || new Date())
+  const [postingDate, setPostingDate] = useState(new Date(job_posting_date)  || new Date())
+  const handleUpdate = async e => {
     e.preventDefault()
     const form = e.target
-    const image_url = form.image.value;
+            const image_url = form.image.value;
+        
+            const job_title = form.job_title.value
+            const posted_by = user?.displayName
+            const buyer_email = form.email.value
+            const application_deadline = startDate
+            const job_posting_date = postingDate
+            const job_type = form.category.value
+            const min_price = parseFloat(form.min_price.value)
+            const max_price = parseFloat(form.max_price.value)
+            const description = form.description.value
+         
+            const jobData = {
+              image_url,
+              job_title,
+              application_deadline,
+              job_posting_date,
+              job_type,
+              posted_by,
+              min_price,
+              max_price,
+              description,
+              buyer_email,
+              job_applicants
+            
+            }
 
-    const job_title = form.job_title.value
-    const posted_by = user?.displayName
-    const buyer_email = form.email.value
-    const application_deadline = startDate
-    const job_posting_date = postingDate
-    const job_type = form.category.value
-    const min_price = parseFloat(form.min_price.value)
-    const max_price = parseFloat(form.max_price.value)
-    const description = form.description.value
-    const job_applicants = job_applicants_number;
-    const jobData = {
-      image_url,
-      job_title,
-      application_deadline,
-      job_posting_date,
-      job_type,
-      posted_by,
-      min_price,
-      max_price,
-      description,
-      buyer_email,
-      job_applicants
-    //   buyer: {
-    //     email,
-    //     name: user?.displayName,
-    //     photo: user?.photoURL,
-    //   },
-    }
-    console.log(jobData);
     try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/postedJobs`,
+      const { data } = await axios.put(
+        `${import.meta.env.VITE_API_URL}/job/${_id}`,
         jobData
       )
       console.log(data)
-      if (data.insertedId) {
-        Swal.fire({
-            title: 'Success!',
-            text: 'Job data added successfully',
-            icon: 'success',
-            confirmButtonText: 'Cool'
-          })
-        
-    }
-     
+      Swal.fire({
+        title: 'Success!',
+        text: 'Updated successfully',
+        icon: 'success',
+        confirmButtonText: 'Cool'
+      })
+   
     } catch (err) {
       console.log(err)
+      toast.error(err.message)
     }
   }
+
   return (
     <div className='flex justify-center items-center min-h-[calc(100vh-306px)] my-12'>
       <section className=' p-2 md:p-6 mx-auto bg-purple-300 rounded-md shadow-md '>
         <h2 className='text-center text-lg font-semibold text-gray-700 capitalize '>
-          Post a Job
+          Update a Job
         </h2>
 
-        <form onSubmit={handleAddJob}>
+        <form onSubmit={handleUpdate}>
           <div className='grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2'>
             <div>
             <label className="block mb-2 dark:text-white">
@@ -87,6 +98,7 @@ const AddAJob = () => {
                 placeholder="Picture Url "
                 id="name"
                 name="image"
+                defaultValue={image_url}
               />
 
               <label className='text-gray-700 ' htmlFor='job_title'>
@@ -98,6 +110,7 @@ const AddAJob = () => {
                 placeholder='job title'
                 type='text'
                 className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
+                defaultValue={job_title}
               />
               <div className='flex flex-col gap-2 '>
               <label className='text-gray-700 ' htmlFor='category'>
@@ -107,11 +120,14 @@ const AddAJob = () => {
                 name='category'
                 id='category'
                 className='border p-2 rounded-md'
+                defaultValue={job_type}
+              
               >
                 <option value='On Site'>On Site</option>
                 <option value='Remote'>Remote</option>
                 <option value='Hybrid'>Hybrid</option>
                 <option value='Part-Time'>Part-Time</option>
+             
               </select>
             </div>
             </div>
@@ -141,6 +157,8 @@ const AddAJob = () => {
                 className='border p-2 rounded-md'
                 selected={postingDate}
                 onChange={date => setPostingDate(date)}
+                defaultValue={job_posting_date}
+                disabled
               />
             </div>
             <div className='flex flex-col gap-2 '>
@@ -151,6 +169,7 @@ const AddAJob = () => {
                 className='border p-2 rounded-md'
                 selected={startDate}
                 onChange={date => setStartDate(date)}
+                defaultValue={application_deadline}
               />
             </div>
 
@@ -164,6 +183,7 @@ const AddAJob = () => {
                 name='min_price'
                 type='number'
                 className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
+                defaultValue={min_price}
               />
             </div>
 
@@ -176,6 +196,7 @@ const AddAJob = () => {
                 name='max_price'
                 type='number'
                 className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
+                defaultValue={max_price}
               />
             </div>
             <div>
@@ -187,8 +208,9 @@ const AddAJob = () => {
                 name='job_applicants_number'
                 type='number'
                 className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
+                
+                defaultValue={job_applicants}
                 disabled
-                defaultValue={job_applicants_number}
               />
             </div>
           </div>
@@ -200,11 +222,12 @@ const AddAJob = () => {
               className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
               name='description'
               id='description'
+              defaultValue={description}
             ></textarea>
           </div>
           <div className='flex justify-center mt-6'>
             <button className='px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-yellow-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600'>
-              Add job 
+              Update 
             </button>
           </div>
         </form>
@@ -213,4 +236,4 @@ const AddAJob = () => {
   )
 }
 
-export default AddAJob
+export default Update
