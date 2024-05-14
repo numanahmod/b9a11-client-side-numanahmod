@@ -16,7 +16,7 @@ const JobCard = ({job}) => {
 
     const handleButton = () =>{
         if (!user) {
-            toast.success('To go to the single details page, LogIn first')
+            toast.error('To go to the single details page, LogIn first')
         }
     }
 

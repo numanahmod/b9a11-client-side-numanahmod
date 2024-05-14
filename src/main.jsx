@@ -27,6 +27,7 @@ import AddAJob from './Pages/AddAJob';
 
 import MyAddedJobs from './Pages/MyAddedJobs';
 import Update from './Pages/Update';
+import AppliedJobs from './Pages/AppliedJobs';
 
 
 
@@ -90,6 +91,11 @@ const router = createBrowserRouter([
         path:"/update/:id",
         element: <Update></Update>,
         loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/job/${params.id}`)
+        
+      },
+      {
+        path:"/appliedJobs",
+        element: <PrivateRoute><AppliedJobs></AppliedJobs></PrivateRoute>, 
         
       },
       

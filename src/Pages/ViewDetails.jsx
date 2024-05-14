@@ -14,7 +14,7 @@ const ViewDetails = () => {
         const {job_type, job_title,
             posted_by,  
             min_price, max_price, job_applicants, description, image_url, _id, buyer_email, 
-            job_posting_date, application_deadline,
+             application_deadline,
              } = job;
 
             const {user } = useContext(AuthContext);
@@ -24,18 +24,18 @@ const ViewDetails = () => {
         e.preventDefault();
 
         if(user?.email === buyer_email) return toast.error('You can not apply')
-        // if(application_deadline === applyDated) return toast.error('Date is over')
+        // if(application_deadline <= applyDated) return toast.error('Date is over')
         const form = e.target;
         const jobId = _id
-        // const Deadline = application_deadline;
-
+        const category = job_type;
+       const job_t =job_title; 
         const applyDated = applyDate;
-        
+        const deadline = application_deadline;
         const email = user?.email;
         const username = user?.displayName
         const status = 'pending';
         const  resume = form.resumeLink.value;
-        const applyForm = {jobId, email, status, username,resume, applyDated }
+        const applyForm = {jobId, email, status, username,resume, applyDated, deadline, category, job_t }
         console.table(applyForm);
 
         try {
@@ -100,6 +100,10 @@ const ViewDetails = () => {
                    <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
   <div className="modal-box">
     <form onSubmit={handleSubmit}> 
+    <form method="dialog">
+      {/* if there is a button in form, it will close the modal */}
+      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
     <p className="text-center text-2xl font-bold">Apply Form </p>
        <div className="grid gap-2">
        <label htmlFor="">User name </label>
@@ -117,13 +121,14 @@ const ViewDetails = () => {
         className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-900 text-gray-100 focus:border-violet-400" required />
        </div>
        <div className='flex flex-col gap-2 '>
-              <label className='text-gray-700'>Deadline</label>
+              <label className='text-gray-700'>Apply date </label>
 
               {/* Date Picker Input Field */}
               <DatePicker
                 className='border p-2 rounded-md'
                 selected={applyDate}
                 onChange={date => setApplyDate(date)}
+                disabled
               />
             </div>
 
@@ -131,7 +136,7 @@ const ViewDetails = () => {
        <div className="modal-action">
       <button   method="dialog">
         {/* if there is a button in div, it will close the modal */}
-        <input type="submit" value="submit" className="btn bg-orange-500"/>
+        <input type="submit" value="Apply" className="btn bg-orange-500"/>
       </button>
     </div>
     </form>

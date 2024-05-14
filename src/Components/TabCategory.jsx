@@ -6,8 +6,8 @@ const TabCategory = ({jobs}) => {
     return (
         <div className='m-10'>
           <Tabs>
-    <div className='flex items-center justify-center text-black font-bold text-xl'>
-    <TabList>
+    <div className='flex items-center justify-center text-black font-bold text-xl bg-slate-300'>
+    <TabList className={'bg-slate-300'}>
       <Tab>On-Site</Tab>
       <Tab>Remote</Tab>
       <Tab>Hybrid</Tab>
