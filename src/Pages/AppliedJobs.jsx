@@ -23,15 +23,15 @@ const AppliedJobs = () => {
 console.log(applies);
     return (
         <div className="m-6">
-        <h2 className=' text-lg font-bold text-violet-600 text-center'>My Applied Jobs <span className='px-3 py-1 text-xs text-amber-400 bg-black rounded-full '>
-          {applies.length} Job
-        </span> </h2>
+        <h2 className=' text-lg font-bold text-violet-600 text-center'>I have Applied in <span className='px-3 py-1 text-xs text-amber-400 bg-lime-700 rounded-full '>
+          {applies.length} 
+        </span>  Jobs </h2>
             <div className='flex flex-col mt-6 mb-6'>
         <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
           <div className='inline-block min-w-full py-2 align-middle md:px-6 lg:px-8'>
             <div className='overflow-hidden border border-gray-200  md:rounded-lg'>
               <table className='min-w-full divide-y divide-gray-200'>
-                <thead className=' bg-emerald-200'>
+                <thead className=' bg-green-400'>
                   <tr className=''>
                     <th
                       scope='col'

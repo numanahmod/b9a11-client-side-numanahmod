@@ -59,11 +59,11 @@ const MyAddedJobs = () => {
   return (
     <section className='container px-4 mx-auto pt-12'>
       <div className=' gap-x-3 text-center'>
-        <h2 className='text-lg font-bold text-violet-600 text-center'>My Added Jobs</h2>
+        <h2 className='text-lg font-bold text-violet-600 text-center'>I have posted <span className='px-3 py-1 text-xs text-amber-400 bg-black rounded-full '>
+          {jobs.length}
+        </span> Jobs</h2>
 
-        <span className='px-3 py-1 text-xs text-amber-400 bg-black rounded-full '>
-          {jobs.length} Job
-        </span>
+        
       </div>
 
       <div className='flex flex-col mt-6 mb-6'>

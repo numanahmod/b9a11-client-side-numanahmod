@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 // import { Helmet } from "react-helmet-async";
 import google from '/google.png'
+import axios from "axios";
 
 
 const LogIn = () => {
@@ -16,7 +17,7 @@ const LogIn = () => {
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
-    const githubProvider =new GithubAuthProvider();
+    // const githubProvider =new GithubAuthProvider();
     
     const {login } = useContext(AuthContext);
 
@@ -66,7 +67,9 @@ const LogIn = () => {
 		}
 
     const handleGoogleLogin = () => {
-        signInWithPopup(auth, provider)
+       const result = signInWithPopup(auth, provider)
+  const {data} = axios.post(`${import.meta.env.VITE_API_URL}/jwt`, {email: result?.user?.email})
+
         .then(result =>{
          const loggedInUser = result.user;
  toast.success('Login successfully with Google')
@@ -74,7 +77,7 @@ const LogIn = () => {
 	// navigate after login 
  navigate(location?.state? location.state: '/');
 	
-       
+       console.log(data);
 
        
         
