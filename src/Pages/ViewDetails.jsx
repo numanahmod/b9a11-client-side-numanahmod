@@ -11,6 +11,9 @@ import Swal from "sweetalert2";
 const ViewDetails = () => {
         const job = useLoaderData();
         const [applyDate, setApplyDate] = useState(new Date())
+
+       
+
         const {job_type, job_title,
             posted_by,  
             min_price, max_price, job_applicants, description, image_url, _id, buyer_email, 
@@ -24,7 +27,7 @@ const ViewDetails = () => {
         e.preventDefault();
 
         if(user?.email === buyer_email) return toast.error('You can not apply')
-        // if(application_deadline <= applyDated) return toast.error('Date is over')
+        
         const form = e.target;
         const jobId = _id
         const category = job_type;
@@ -35,25 +38,25 @@ const ViewDetails = () => {
         const username = user?.displayName
         const status = 'pending';
         const  resume = form.resumeLink.value;
-        const applyForm = {jobId, email, status, username,resume, applyDated, deadline, category, job_t }
+        const applyForm = {jobId, email, status, username,resume, applyDated, deadline, category, job_t, job_applicants: 0, }
         console.table(applyForm);
-
+        if(application_deadline < applyDate) return toast.error('Date is over')
         try {
           const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/appliedJobs`, applyForm)
           console.log(data);
           if (data.insertedId) {
             Swal.fire({
                 title: 'Success!',
-                text: 'Job data added successfully',
+                text: 'Applied successfully',
                 icon: 'success',
                 confirmButtonText: 'Cool'
               })
-              
+              e.target.reset()
             
         }
         } catch (err) {
-          console.log(err);
-          toast.error('There is', err.massage)
+          toast.error(err.response.data)
+          e.target.reset()
         }
         document.getElementById('my_modal_5').close()
     }

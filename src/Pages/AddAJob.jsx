@@ -28,7 +28,7 @@ const AddAJob = () => {
     const min_price = parseFloat(form.min_price.value)
     const max_price = parseFloat(form.max_price.value)
     const description = form.description.value
-    const job_applicants = job_applicants_number;
+    // const job_applicants = 0;
     const jobData = {
       image_url,
       job_title,
@@ -40,7 +40,7 @@ const AddAJob = () => {
       max_price,
       description,
       buyer_email,
-      job_applicants
+      job_applicants: 0,
     //   buyer: {
     //     email,
     //     name: user?.displayName,
@@ -179,16 +179,18 @@ const AddAJob = () => {
               />
             </div>
             <div>
-              <label className='text-gray-700 ' htmlFor='job_applicants_number'>
+              <label className='text-gray-700 ' htmlFor='job_applicants'>
                 Job applicants 
               </label>
               <input
-                id='job_applicants_number'
-                name='job_applicants_number'
+                id='job_applicants'
+                name='job_applicants'
                 type='number'
                 className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
                 disabled
                 defaultValue={job_applicants_number}
+               
+              
               />
             </div>
           </div>

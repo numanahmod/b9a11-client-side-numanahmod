@@ -1,21 +1,25 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../providers/AuthProvider";
+
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../hooks/useAuth";
+import { Tabs } from "react-tabs";
+import { useEffect, useState } from "react";
+
 
 
 const AppliedJobs = () => {
     const { user } = useAuth()
-
+    const [filter, setFilter] = useState('')
     // const [applies, setApplies ] =useState([])
 
-const {data: applies = [],         isLoading,
- refresh, isError, error } = useQuery({
+const {data: applies = [],  isLoading, refetch
+ } = useQuery({
     queryFn: () =>  getData(),
-    queryKey: ('applies'),
-})
+    queryKey: ('applies', user?.email),
+} 
+// [filter]
+)
 console.log(applies);
 
     // useEffect(() => {
@@ -24,19 +28,42 @@ console.log(applies);
     
       const getData = async () => {
         const { data } = await axios(
-          `${import.meta.env.VITE_API_URL}/getMyAppliedJobs/${user?.email}`
+          `${import.meta.env.VITE_API_URL}/getMyAppliedJobs/${user?.email}?filter=${filter}`
+        //  
         )
        return data
         
       }
-      if (isLoading) return <p className="text-center text-red-600 text-3xl font-bold">data is still loading </p>
+      useEffect(()=>{
+        refetch()
+      },[filter, refetch])
+      if (isLoading) return <p className="text-center text-red-600 text-3xl font-bold">Data is still loading </p>
 // console.log(applies);
     return (
         <div className="m-6">
         <h2 className=' text-lg font-bold text-violet-600 text-center'>I have Applied in <span className='px-3 py-1 text-xs text-amber-400 bg-lime-700 rounded-full '>
           {applies.length} 
         </span>  Jobs </h2>
-            <div className='flex flex-col mt-6 mb-6'>
+        <div>
+            <select
+              onChange={e => {
+                setFilter(e.target.value)
+            refetch()
+              }}
+              value={filter}
+              name='category'
+              id='category'
+              className='border p-4 rounded-lg'
+            >
+              <option value=''>Filter By Category</option>
+              <option value='On-Site'>On-Site</option>
+                <option value='Remote'>Remote</option>
+                <option value='Hybrid'>Hybrid</option>
+                <option value='Part-Time'>Part-Time</option>
+            </select>
+          </div>
+           <Tabs>
+           <div className='flex flex-col mt-6 mb-6'>
         <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
           <div className='inline-block min-w-full py-2 align-middle md:px-6 lg:px-8'>
             <div className='overflow-hidden border border-gray-200  md:rounded-lg'>
@@ -141,7 +168,8 @@ console.log(applies);
             </div>
           </div>
         </div>
-      </div>
+           </div>
+           </Tabs>
         </div>
     );
 };

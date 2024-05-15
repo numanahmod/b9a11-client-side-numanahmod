@@ -35,6 +35,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -99,6 +100,7 @@ const router = createBrowserRouter([
         element: <PrivateRoute><AppliedJobs></AppliedJobs></PrivateRoute>, 
         
       },
+     
       
       
      
