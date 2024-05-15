@@ -29,6 +29,10 @@ const Blogs = () => {
                             <p className="text-sm text-gray-500 dark:text-gray-400">Lead Developer</p>
                         </div>
                     </div>
+                    <div>
+                      <p className='text-center text-2xl font-bold'> Code Explanation</p>
+                      <p className='text-center text-xl font-bold'> At first I have started working in this website with home page. <br /> I completed at first navbar. Then I have worked for footer. <br /> After completing footer and navbar for all page except 404 page, <br /> I have gone to do the authentication log in and registration page in firebase. <br /> Then I have done remaining work of  home page. <br />Then serially I have completed ViewDetails page, all jobs page, <br /> my applied jobs my added posts page and this blog page.</p>
+                    </div>
                 </div>
             </div>
 

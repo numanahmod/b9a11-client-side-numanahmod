@@ -38,9 +38,9 @@ const ViewDetails = () => {
         const username = user?.displayName
         const status = 'pending';
         const  resume = form.resumeLink.value;
-        const applyForm = {jobId, email, status, username,resume, applyDated, deadline, category, job_t, job_applicants: 0, }
+        const applyForm = {jobId, email, status, username,resume, applyDated, deadline, category, job_t, job_applicants }
         console.table(applyForm);
-        if(application_deadline < applyDate) return toast.error('Date is over')
+if(application_deadline < applyDate) return toast.error('Date is over')
         try {
           const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/appliedJobs`, applyForm)
           console.log(data);
