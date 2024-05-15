@@ -2,25 +2,35 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import useAuth from "../hooks/useAuth";
 
 
 const AppliedJobs = () => {
-    const { user } = useContext(AuthContext)
+    const { user } = useAuth()
 
-    const [applies, setApplies ] =useState([])
+    // const [applies, setApplies ] =useState([])
 
-    useEffect(() => {
-        getData()
-      }, [user])
+const {data: applies = [],         isLoading,
+ refresh, isError, error } = useQuery({
+    queryFn: () =>  getData(),
+    queryKey: ('applies'),
+})
+console.log(applies);
+
+    // useEffect(() => {
+    //     getData()
+    //   }, [user])
     
       const getData = async () => {
         const { data } = await axios(
           `${import.meta.env.VITE_API_URL}/getMyAppliedJobs/${user?.email}`
         )
-        console.log(data);
-        setApplies(data)
+       return data
+        
       }
-console.log(applies);
+      if (isLoading) return <p className="text-center text-red-600 text-3xl font-bold">data is still loading </p>
+// console.log(applies);
     return (
         <div className="m-6">
         <h2 className=' text-lg font-bold text-violet-600 text-center'>I have Applied in <span className='px-3 py-1 text-xs text-amber-400 bg-lime-700 rounded-full '>

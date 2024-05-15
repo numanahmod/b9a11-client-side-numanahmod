@@ -20,11 +20,11 @@ const Update = () => {
               application_deadline,
               job_posting_date,
               job_type,
-              posted_by,
+            
               min_price,
               max_price,
               description,
-              buyer_email,
+          
               job_applicants
   } = job || {}
   const { user } = useContext(AuthContext)

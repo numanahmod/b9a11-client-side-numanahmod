@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
-import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import {  GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import app from "../firebase/Firebase.config";
 
 import { toast } from "react-toastify";
@@ -16,7 +16,7 @@ const LogIn = () => {
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
-    const githubProvider =new GithubAuthProvider();
+
     
     const {login } = useContext(AuthContext);
 
@@ -43,7 +43,7 @@ const LogIn = () => {
  // navigate after login 
  navigate(location?.state? location.state: '/');
 	const userC = {email};
-	fetch('https://b9a10-server-side-numanahmod.vercel.app/user',{
+	fetch(`${import.meta.env.VITE_API_URL}/user`,{
 		method: 'POST',
 		headers: {
 			'content-type' : 'application/json'

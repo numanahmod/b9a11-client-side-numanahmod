@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../providers/AuthProvider'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import toast from 'react-hot-toast'
+
 import Swal from 'sweetalert2'
 
 const MyAddedJobs = () => {
