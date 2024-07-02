@@ -1,6 +1,6 @@
 **The Website Name: **WD Jobs**
 
-**Live Site URL:** [Enjoy Nature](https://b9a11-client-side-numanahmod.web.app)
+**Live Site URL:** [WD Jobs](https://b9a11-client-side-numanahmod.web.app)
 
 ### Projects Overview:
 * I have made this website to publish the work circular for web developers. 
@@ -9,7 +9,7 @@
 
 ### Features and Characteristics: To make this website, I have used here:
 
-* My selected category is "1. Southeast Asia"
+
 
 * Language: javaScript(92.2%) , css(3.3%) , html(0.5%)
   
