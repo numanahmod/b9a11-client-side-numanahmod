@@ -1,14 +1,22 @@
 import token from '/tkn.webp';
-
-
+//motion 
+import {motion} from 'framer-motion'
+//variants 
+import {fadeIn} from '../variants'
 
 const Blogs = () => {
   return (
-    <div className=" m-8">
+    <div
+    
+    className=" m-8">
       
 
       <section className="bg-white dark:bg-gray-900">
-    <div className="container px-6 py-10 mx-auto">
+    <motion.div
+    variants={fadeIn('up', 0.2)}
+    initial= 'hidden'
+    whileInView={'show'}
+    viewport={{once: false, amount: 0.7}} className="container px-6 py-10 mx-auto">
         <div className="lg:flex lg:-mx-6">
             <div className="lg:w-3/4 lg:px-6">
            
@@ -70,7 +78,11 @@ Refresh tokens by themselves don’t grant the user any access. To avoid needles
 
                 <hr className="my-6 border-gray-200 dark:border-gray-700"/>
 
-                <div tabIndex={0} className="collapse collapse-plus border border-base-300 bg-base-200">
+                <motion.div
+    variants={fadeIn('up', 0.2)}
+    initial= 'hidden'
+    whileInView={'show'}
+    viewport={{once: false, amount: 0.7}} tabIndex={0} className="collapse collapse-plus border border-base-300 bg-base-200">
   <div className="collapse-title text-xl font-medium">
   How do they work and where should
 we store them on the client side?
@@ -82,7 +94,7 @@ Access Token: Access tokens should be stored securely on the client side, typica
 <br />
 Refresh Token: Refresh tokens should be stored securely on the client side as well, but they require even more stringent security measures since they have a longer lifespan. They should never be exposed to client-side code and are usually stored in a secure storage mechanism such as browser's local storage or secure HTTP cookies with HttpOnly and Secure flags.</p>
   </div>
-</div>
+</motion.div>
 
                 <hr className="my-6 border-gray-200 dark:border-gray-700"/>
 
@@ -114,7 +126,7 @@ Since the framework leverages TypeScript, Nest.js is especially popular with tea
 </div>
             </div>
         </div>
-    </div>
+    </motion.div>
 </section>
       
     </div>

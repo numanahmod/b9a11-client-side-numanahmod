@@ -1,0 +1,214 @@
+@font-face {
+    font-family: 'solaiman_lipi';
+    src: url("../fonts/SOLAIMA0.eot");
+    src:url("../fonts/SOLAIMA0.eot?#iefix") format('embedded-opentype'),
+        url("../fonts/SolaimanLipiNormal.woff") format('woff'),
+        url("../fonts/solaiman-lipi.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@page {
+    size: A4;  
+    /*
+    size keywords, such as “A4” or “legal.”
+    page’s orientation — “portrait” or “landscape.”
+    */
+
+
+}
+@page:right{
+  @bottom-right {
+    content: "Page " counter(page) " of " counter(pages);
+  }
+}
+
+body {
+    font-family:solaiman_lipi,Vrinda,Helvetica,sans-serif;
+    font-size: 14px;
+    background: #fff!important;
+    color: #444;
+    font-weight: 500;
+    line-height: 1.3;
+}
+.applicat_photo{right: 10px; top: 0px; position: absolute; border: .5px solid #444; padding: 3px; background: #fff;}
+hr{margin: 5px 0; border-bottom:.2px solid #444;}
+table {
+    page-break-inside: avoid;
+}
+.pritn_table{
+    margin-bottom:5px;
+    margin-top: 5px;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+.full_border{
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+.pritn_table h1,
+.pritn_table h2,
+.pritn_table h3,
+.pritn_table h4{
+    margin: 0;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: 500;
+    color: inherit;
+}
+.pritn_table p{
+    font-weight: 500;
+}
+.pritn_table h4{
+    font-size: 18px;
+}
+.pritn_table h3{
+    font-size: 20px;
+}
+.pritn_table h2{
+    font-size: 30px;
+}
+.pritn_table .head_tile{
+    font-size: 25px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.pritn_table .sub_title{
+    font-size: 20px;
+    margin-bottom: 2px;
+}
+.pritn_table tbody tr td,.pritn_table tbody tr th,.pritn_table thead tr th{
+    padding: 5px 6px; 
+    margin: 0px;
+}
+.pritn_table tbody tr td p,.pritn_table tbody tr th p,.pritn_table thead tr th p{
+    padding:0px; 
+    margin: 0px;
+}
+.pritn_table address{
+    margin-bottom: 0px;
+    font-style: normal;
+    font-weight: 500;
+}
+.pritn_table .clearfix{
+    clear: both;
+}
+.pritn_table caption h3{
+    font-size: 20px;
+    color: #000;
+}
+.pritn_table img{vertical-align: middle;}
+.pritn_table caption{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: #444;
+    text-align: left;
+}
+.pritn_table .text-left {
+    text-align: left;
+}
+.pritn_table .text-center {
+    text-align: center;
+}
+.pritn_table .text-right {
+    text-align: right;
+}
+.pritn_table .pull-right{
+    float: right;
+}
+.pritn_table .pull-left{
+    float: left;
+}
+.pritn_table ul{
+    margin-left: 0px;
+}
+.pritn_table ul li{
+    line-height: 20px;
+}
+.pritn_table .no_padding{
+    padding: 0px;
+}
+.v-top{vertical-align: top!important;}
+.v-middle{vertical-align: middle!important;}
+.v-bottom{vertical-align: bottom!important;}
+.inline_table{
+    margin: 0px!important;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+.pritn_table .inline_table tbody tr td,.pritn_table .inline_table thead tr th{
+    border-top: 0px!important;
+    border-right: .5px solid #444!important;
+    border-left: 0px!important;
+}
+.pritn_table .inline_table tbody tr td:last-child{
+    border-right: 0px!important;  
+}
+.no_border tbody tr td,.no_border thead tr th{
+    border: 0px;
+}
+td.no_border{
+    border: 0px!important;
+}
+th.no_border{
+    border: 0px!important;
+}
+.full_border tbody tr td,.full_border tbody tr th, .full_border thead tr th{
+    border: .1px solid #444;
+}
+/*.full_border tbody tr td,.full_border tbody tr th, .full_border thead tr th{
+    border-right:1px solid #666;
+    border-bottom:1px solid #666;
+}
+.full_border tbody tr td:first-child,.full_border tbody tr th:first-child, .full_border thead tr th:first-child{
+    border-left:1px solid #666;
+}*/
+.full_border tbody tr th{
+    text-align: center;
+    vertical-align: top;
+}
+.bottom_border{
+    border-bottom: .5px solid #444!important;
+}
+.no_bottom_border{
+    border-bottom-width:0px!important;
+}
+.no_right_border{
+    border-right-width:0px!important;  
+}
+.top_border{
+    border-top:.5px solid #444!important;  
+}
+.no_top_border{
+    border-top-width:0px!important;  
+}
+.no_left_border{
+    border-left-width:0px!important;  
+}
+.signature_box{
+    width: 250px;
+    text-align: center;
+    float: right;
+}
+.print-btn-icon{
+    font-size: 20px;
+    position: absolute;
+    right: 40px;
+    top: 14px;
+}
+.report_footer{
+    font-size: 10px;
+}
+.inner_table{
+    margin-bottom:0px;
+    margin-top: 0px;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+.inner_table tbody tr td,.inner_table tbody tr th,.inner_table thead tr th{
+    padding: 0px; 
+    margin: 0px;
+}

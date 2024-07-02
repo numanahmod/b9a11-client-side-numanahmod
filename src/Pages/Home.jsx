@@ -28,7 +28,10 @@ import { Fade } from 'react-awesome-reveal';
 
 import TabCategory from '../Components/TabCategory';
 import { useLoaderData } from 'react-router-dom';
-
+//motion 
+import {motion} from 'framer-motion'
+//variants 
+import {fadeIn} from '../variants'
 const Home = () => {
 
 
@@ -79,32 +82,44 @@ const Home = () => {
         <SwiperSlide className='relative w-full'><div className="hero min-h-screen" style={{backgroundImage: `url(${slider1})`}}>
   <div className="hero-overlay bg-opacity-60"></div>
   <div className="hero-content text-center text-neutral-content">
-    <div className="max-w-md">
+    <motion.div
+    variants={fadeIn('up', 0.2)}
+    initial= 'hidden'
+    whileInView={'show'}
+    viewport={{once: false, amount: 0.7}} className="max-w-md">
       <h1 className="mb-5 text-5xl font-bold"> Remote Job </h1>
       <p className="mb-5">One of our most popular job categories and in-demand skills in the job market right now 💻 Find new and exciting remote full-stack programming and engineering job opportunities below!</p>
       
-    </div>
+    </motion.div>
   </div>
 </div></SwiperSlide>
         <SwiperSlide className='relative w-full'><div className="hero min-h-screen" style={{backgroundImage: `url(${slider2})`}}>
   <div className="hero-overlay bg-opacity-60"></div>
   <div className="hero-content text-center text-neutral-content">
-    <div className="max-w-md">
+    <motion.div
+    variants={fadeIn('up', 0.2)}
+    initial= 'hidden'
+    whileInView={'show'}
+    viewport={{once: false, amount: 0.7}} className="max-w-md">
       <h1 className="mb-5 text-5xl font-bold"> Hybrid WD jobs 
  </h1>
       <p className="mb-5">Are you looking for Hybrid Web Developer jobs near you? 1-Click apply to Hybrid Web Developer jobs. start your career at Hybrid today! </p>
     
-    </div>
+    </motion.div>
   </div>
 </div></SwiperSlide>
         <SwiperSlide className='relative w-full'><div className="hero min-h-screen" style={{backgroundImage: `url(${slider3})`}}>
   <div className="hero-overlay bg-opacity-60"></div>
   <div className="hero-content text-center text-neutral-content">
-    <div className="max-w-md">
+    <motion.div
+    variants={fadeIn('up', 0.2)}
+    initial= 'hidden'
+    whileInView={'show'}
+    viewport={{once: false, amount: 0.7}} className="max-w-md">
       <h1 className="mb-5 text-5xl font-bold">Part-Time jobs </h1>
       <p className="mb-5">Here you will find more part time web development works. To click on part time web development tab to get the all part time jobs.  </p>
      
-    </div>
+    </motion.div>
   </div>
 </div></SwiperSlide>
         
@@ -122,12 +137,16 @@ const Home = () => {
 
            
 
-            <div>
+            <motion.div
+    variants={fadeIn('up', 0.2)}
+    initial= 'hidden'
+    whileInView={'show'}
+    viewport={{once: false, amount: 0.7}}>
             <h1 className='text-center text-3xl font-bold mb-8 animate__animated animate__swing'> Job by category  </h1>
             <p className='text-center'>Find out your desire work from here. Click your job category tab to get your job</p>
               <TabCategory jobs= {jobs}/> 
 
-            </div>
+            </motion.div>
             
 
 

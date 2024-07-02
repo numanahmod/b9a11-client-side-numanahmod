@@ -4,13 +4,39 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../hooks/useAuth";
 import { Tabs } from "react-tabs";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+//react to pdf
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 
 
 const AppliedJobs = () => {
     const { user } = useAuth()
     const [filter, setFilter] = useState('')
+
+    const pdfRef = useRef();
+
+    const downloadPDF = () =>{
+      const input = pdfRef.current;
+      html2canvas(input).then((canvas) =>{
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4', true );
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+
+        const imgWidth = canvas.width;
+        const imgHeight = canvas.height;
+        const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+
+        const imgX = (pdfWidth - imgWidth * ratio) / 2;
+
+        const imgY = 30;
+
+        pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+        pdf.save('invoice.pdf');
+      });
+    }
     // const [applies, setApplies ] =useState([])
 
 const {data: applies = [],  isLoading, refetch
@@ -63,7 +89,7 @@ console.log(applies);
             </select>
           </div>
            <Tabs>
-           <div className='flex flex-col mt-6 mb-6'>
+           <div className='flex flex-col mt-6 mb-6' ref={pdfRef}>
         <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
           <div className='inline-block min-w-full py-2 align-middle md:px-6 lg:px-8'>
             <div className='overflow-hidden border border-gray-200  md:rounded-lg'>
@@ -169,7 +195,13 @@ console.log(applies);
           </div>
         </div>
            </div>
+          <div className="row text-center mt-5">
+          <button className="btn btn-primary" onClick={downloadPDF}>Download Pdf </button>
+          </div>
            </Tabs>
+
+                
+
         </div>
     );
 };

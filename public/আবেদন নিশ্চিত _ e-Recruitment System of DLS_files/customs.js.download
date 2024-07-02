@@ -1,0 +1,23 @@
+
+// bootstrap datepicker intigration
+$(function () {
+    $('.datepicker').datepicker({
+        format: "yyyy-mm-dd",
+        todayBtn: "linked",
+        autoclose: true,
+        todayHighlight: true
+    });
+});
+// bootstrap Popovers initialize
+$(function () {
+  $('[data-toggle="popover"]').popover();
+});
+
+// bootstrap image popup
+$(function () {
+    $('.pop_image').on('click', function () {
+        $('#imagepreview').attr('src', $(this).attr('href'));
+        $('#imagemodal').modal('show');
+        return false;
+    });
+});
